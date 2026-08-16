@@ -5,9 +5,9 @@ local WP          = workspace:WaitForChild("Players", 10)
 local M = {}
 
 function M.getAll()
-    local result   = {}
+    local result  = {}
     if not WP then return result end
-    local myColor  = LocalPlayer.TeamColor
+    local myColor = LocalPlayer.TeamColor
 
     for _, folder in ipairs(WP:GetChildren()) do
         for _, model in ipairs(folder:GetChildren()) do
