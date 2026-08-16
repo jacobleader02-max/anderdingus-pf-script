@@ -1,8 +1,4 @@
-local RunService  = game:GetService("RunService")
-local Players     = game:GetService("Players")
-local LocalPlayer = Players.LocalPlayer
-
-local ESP = {}
+local ESP   = {}
 local store = {}
 local CFG, C, newDraw, getAll
 
@@ -60,8 +56,7 @@ function ESP.update(players, camera, myPos)
         if e.health  then e.health.Text=string.format("♥ %.0f%%",data.healthPct) e.health.Position=Vector2.new(bx-4,by+bh/2-5) e.health.Visible=CFG.ShowHealth end
     end
 
-    -- clean stale
-    for model, e in pairs(store) do
+    for model,e in pairs(store) do
         if not active[model] then
             for _,obj in pairs(e) do if obj then pcall(function() obj:Remove() end) end end
             store[model] = nil
