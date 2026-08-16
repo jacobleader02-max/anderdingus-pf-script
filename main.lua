@@ -6,12 +6,12 @@ end
 
 local Utils   = req("utils.lua")
 local CFG     = req("config.lua")
-local Players = req("players.lua")
+local PlrMod  = req("players.lua")
 local ESP     = req("esp.lua")
 local Aimbot  = req("aimbot.lua")
 local UI      = req("ui.lua")
 
-ESP.init(CFG, Utils, Players)
+ESP.init(CFG, Utils, PlrMod)
 Aimbot.init(CFG)
 UI.init(CFG, Utils)
 
@@ -37,12 +37,13 @@ RunService.RenderStepped:Connect(function()
     local myRoot = myChar and myChar:FindFirstChild("HumanoidRootPart")
     local myPos  = myRoot and myRoot.Position
 
-    local players = Players.getAll()
+    local players = PlrMod.getAll()
 
     if CFG.AimbotEnabled and Aimbot.isHeld() then
         local target = Aimbot.getTarget(players, Camera)
         Aimbot.apply(target, Camera)
     end
 
+    Aimbot.removeRecoil()
     ESP.update(players, Camera, myPos)
 end)
