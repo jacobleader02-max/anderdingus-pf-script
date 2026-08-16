@@ -1,0 +1,16 @@
+return {
+    ESPEnabled   = true,
+    ShowBoxes    = true,
+    ShowNames    = true,
+    ShowDistance = true,
+    ShowHealth   = true,
+    ESPTeamCheck = true,
+    AimbotEnabled= true,
+    FOV          = 120,
+    Smoothness   = 15,
+    AimKeyType   = "key",
+    AimKeyMouse  = Enum.UserInputType.MouseButton2,
+    AimKeyCode   = Enum.KeyCode.E,
+    AimKeyLabel  = "E",
+    AimTeamCheck = true,
+}
