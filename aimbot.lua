@@ -46,4 +46,12 @@ function Aimbot.apply(target, camera)
     end)
 end
 
+function Aimbot.removeRecoil()
+    if not CFG.RecoilEnabled then return end
+    if not UserInputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) then return end
+    pcall(function()
+        mousemoverel(0, CFG.RecoilStrength)
+    end)
+end
+
 return Aimbot
