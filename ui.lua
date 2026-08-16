@@ -1,21 +1,20 @@
 local UserInputService = game:GetService("UserInputService")
 
-local UI  = {}
+local UI        = {}
 local CFG, C
-local WIN_W  = 260
-local FULL_H = 300
-local MINI_H = 26
+local WIN_W     = 260
+local FULL_H    = 340
+local MINI_H    = 26
 local minimized = false
 local SG, Root
+local tabFrames = {}
+local tabs      = {}
 
 function UI.init(cfg, utils)
     CFG = cfg
     C   = utils.C
     UI._build()
 end
-
-local tabFrames = {}
-local tabs      = {}
 
 local function makeTabFrame(parent)
     local sf = Instance.new("ScrollingFrame")
@@ -179,7 +178,7 @@ function UI.mkKeybind(parent,text,default,callback)
 end
 
 function UI._build()
-    SG = Instance.new("ScreenGui")
+    SG=Instance.new("ScreenGui")
     SG.Name="PFCheats" SG.ResetOnSpawn=false
     SG.ZIndexBehavior=Enum.ZIndexBehavior.Sibling
     SG.IgnoreGuiInset=true SG.Parent=game:GetService("CoreGui")
@@ -250,7 +249,6 @@ function UI._build()
         btn.MouseButton1Click:Connect(function() switchTab(name) end)
     end
 
-    -- ESP tab
     local espTab=tabFrames["ESP"]
     UI.mkSection(espTab,"Visibility")
     UI.mkToggle(espTab,"ESP Enabled",    CFG.ESPEnabled,   function(v) CFG.ESPEnabled=v end)
@@ -261,7 +259,6 @@ function UI._build()
     UI.mkSection(espTab,"Team")
     UI.mkToggle(espTab,"Skip Teammates", CFG.ESPTeamCheck, function(v) CFG.ESPTeamCheck=v end)
 
-    -- Aimbot tab
     local aimTab=tabFrames["Aimbot"]
     UI.mkSection(aimTab,"Aimbot")
     UI.mkToggle(aimTab,"Aimbot Enabled",CFG.AimbotEnabled,function(v) CFG.AimbotEnabled=v end)
@@ -269,6 +266,9 @@ function UI._build()
     UI.mkNumInput(aimTab,"Smoothness",CFG.Smoothness,0,100,function(v) CFG.Smoothness=v end)
     UI.mkSection(aimTab,"Team")
     UI.mkToggle(aimTab,"Skip Teammates",CFG.AimTeamCheck,function(v) CFG.AimTeamCheck=v end)
+    UI.mkSection(aimTab,"Recoil")
+    UI.mkToggle(aimTab,"Remove Recoil",CFG.RecoilEnabled,function(v) CFG.RecoilEnabled=v end)
+    UI.mkNumInput(aimTab,"Recoil Strength",CFG.RecoilStrength,0,20,function(v) CFG.RecoilStrength=v end)
     UI.mkSection(aimTab,"Keybind")
     UI.mkKeybind(aimTab,"Aim Key","E",function(input,label)
         if input.UserInputType==Enum.UserInputType.MouseButton2 then
